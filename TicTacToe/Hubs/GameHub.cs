@@ -1,6 +1,12 @@
-﻿namespace TicTacToe.Hubs
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace TicTacToe.Hubs;
+
+public class GameHub : Hub
 {
-    public class GameHub
+    public override Task OnConnectedAsync()
     {
+        Console.WriteLine($"Player with ID '{Context.ConnectionId}' connected.");
+        return base.OnConnectedAsync();
     }
 }

@@ -1,11 +1,14 @@
 using TicTacToe.Client.Pages;
 using TicTacToe.Components;
+using TicTacToe.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -25,6 +28,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.MapHub<GameHub>("/gamehub");
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
